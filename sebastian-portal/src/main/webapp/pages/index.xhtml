@@ -8,39 +8,59 @@
         <ui:define name="contenido">
 
             <p:panel header="${msg.bienvenida}">
-                <h:outputText value="${msg.mensajeBienvenida}" />
+                <h:outputText escape="false" value="${msg.mensajeBienvenida}" />
 
-                <a href="https://www.facebook.com/sebasalazar" target="_blank">
-                    <img src="${sebaBean.ruta}/img/facebook.png" alt="${msg.facebook}" />
-                </a>
-                
-                <a href="https://twitter.com/sebastian_sm" target="_blank">
-                    <img src="${sebaBean.ruta}/img/twitter.png" alt="${msg.twitter}" />
-                </a>
-                
-                <a href="http://cl.linkedin.com/pub/sebastian-salazar-molina/6/857/69" target="_blank">
-                    <img src="${sebaBean.ruta}/img/linkedin.png" alt="${msg.linkedin}" />
-                </a>
-                
-                <a href="https://plus.google.com/112237299662816760539/posts" target="_blank">
-                    <img src="${sebaBean.ruta}/img/google-plus.png" alt="${msg.googleplus}" />
-                </a>
-                
-                <a href="http://www.last.fm/user/ssalazar" target="_blank">
-                    <img src="${sebaBean.ruta}/img/last-fm.png" alt="${msg.lastfm}" />
-                </a>
-                
-                <a href="http://www.youtube.com/user/ssmx2" target="_blank">
-                    <img src="${sebaBean.ruta}/img/youtube.png" alt="${msg.youtube}" />
-                </a>
-                
-                <a href="http://www.chess.com/members/view/sebasalazar" target="_blank">
-                    <img src="${sebaBean.ruta}/img/chess.png" alt="${msg.chess}" />
-                </a>
-                
-                <a href="https://github.com/sebasalazar" target="_blank">
-                    <img src="${sebaBean.ruta}/img/github.png" alt="${msg.github}" />
-                </a>
+                <p:panelGrid columns="8" styleClass="sinBordes">
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="https://www.facebook.com/sebasalazar" target="_blank">
+                            <img src="${sebaBean.ruta}/img/facebook.png" alt="${msg.facebook}" title="${msg.facebook}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="https://twitter.com/sebastian_sm" target="_blank">
+                            <img src="${sebaBean.ruta}/img/twitter.png" alt="${msg.twitter}" title="${msg.twitter}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="http://cl.linkedin.com/pub/sebastian-salazar-molina/6/857/69" target="_blank">
+                            <img src="${sebaBean.ruta}/img/linkedin.png" alt="${msg.linkedin}" title="${msg.linkedin}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="https://plus.google.com/112237299662816760539/posts" target="_blank">
+                            <img src="${sebaBean.ruta}/img/google-plus.png" alt="${msg.googleplus}" title="${msg.googleplus}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="http://www.last.fm/user/ssalazar" target="_blank">
+                            <img src="${sebaBean.ruta}/img/last-fm.png" alt="${msg.lastfm}" title="${msg.lastfm}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="http://www.youtube.com/user/ssmx2" target="_blank">
+                            <img src="${sebaBean.ruta}/img/youtube.png" alt="${msg.youtube}" title="${msg.youtube}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="http://www.chess.com/members/view/sebasalazar" target="_blank">
+                            <img src="${sebaBean.ruta}/img/chess.png" alt="${msg.chess}" title="${msg.chess}" />
+                        </a>
+                    </p:panel>
+
+                    <p:panel styleClass="sinBordes">
+                        <a href="https://github.com/sebasalazar" target="_blank">
+                            <img src="${sebaBean.ruta}/img/github.png" alt="${msg.github}" title="${msg.github}" />
+                        </a>
+                    </p:panel>
+
+                </p:panelGrid>
             </p:panel>
 
         </ui:define>

@@ -43,16 +43,16 @@
     <!--
     reCAPTCHA
     Domain Name: 	sebastian.cl
-    Public Key: 	6LcKndwSAAAAAD8ZM3qN-QoGxzMv_uj6JMMi4v-K
-    Private Key: 	6LcKndwSAAAAAP8AmIyYh6_yFSANfiJJvIIFBOBJ 
+    Public Key: 	asdf
+    Private Key: 	asdf
     -->
     <context-param>
         <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
-        <param-value>6LcKndwSAAAAAD8ZM3qN-QoGxzMv_uj6JMMi4v-K</param-value>
+        <param-value>${recaptcha.public.key}</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
-        <param-value>6LcKndwSAAAAAP8AmIyYh6_yFSANfiJJvIIFBOBJ</param-value>
+        <param-value>${recaptcha.private.key}</param-value>
     </context-param>
 
     <listener>

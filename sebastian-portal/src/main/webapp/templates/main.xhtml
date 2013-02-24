@@ -19,7 +19,7 @@
             <meta name="author" content="Sebastián Salazar Molina" />
             <meta name="keywords" content="${msg.metaKeywords}" />
             <meta name="description" content="${msg.metaDescription}" />
-            <link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="${sebaBean.ruta}/css/estilo.css" media="screen" />
             <title>${msg.titulo}</title>
         </h:head>
 
@@ -31,25 +31,17 @@
                     </div>
                     <div class="clr"></div>
                 </div>
-                <div class="content">
-                    <!--
-                    <ul id="menu">
-                        <li><a class="current" href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a></li>
-                        <li><a href="#">Practice</a></li>
-                        <li><a href="#">Attorneys</a></li>
-                        <li><a href="#">Accidents</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                    -->
+                <div class="contenido">
+
                     <h:form prependId="false">
                         <p:tabMenu activeIndex="0">
                             <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home" />
                         </p:tabMenu>
                     </h:form>
 
-                    <div id="contenido">
+                    <br />
+
+                    <div id="cuerpo">
                         <ui:insert name="contenido" />
                         <div class="clr"></div>
                     </div>
@@ -66,12 +58,28 @@
                         <a href="#">Attorneys</a>
                         <a href="#">Accidents</a>
                         <a href="#">News</a>
-                        <a href="#">About Us</a>
+                        <a href="${sebaBean.ruta}/pages/acerca.jsf">${msg.acerca}</a>
                         <a href="#">Contact Us</a>
                     </p>
-                    <p>Copyright &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="Free CSS Templates">Solucija</a> &#172; <a href="http://www.lawyermarketinggroup.com/">Law Firm Marketing</a></p>
+                    <p>${msg.derechoReservados} &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="${msg.acerca}">${msg.acerca}</a></p>
                 </div>
             </div>
+
+
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-38760509-1']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script');
+                    ga.type = 'text/javascript';
+                    ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
         </h:body>
     </f:view>
 </html>

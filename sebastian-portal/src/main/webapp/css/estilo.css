@@ -1,8 +1,7 @@
-﻿/*
-        template: Lawyer&Attorney
-        author:   Luka Cvrk (www.solucija.com)
-*/
-
+/**
+ * @author Sebastián Salazar Molina 
+ * Estilo Css basado en el template Solucija
+ */
 * { margin: 0; padding: 0; }
 body { font: .74em Tahoma, Verdana, Sans-Serif, Arial; background: url(../img/body.gif) repeat; color: #7f7f7f; }
 h1 { font: normal 3.4em "Trebuchet MS", Helvetica, Arial; }
@@ -13,20 +12,12 @@ p { margin: 0 0 15px; line-height: 1.6em; }
 a { outline: 0; color: #304D6F; text-decoration: none; }
 li { list-style: none; }
 li a, img { display: block; }
-img { outline: 0; border: 0; }
+img { outline: 0; border: none; }
 #wrapper { width: 984px; margin: auto; }
 .clr { clear: both; }
 #logo { float: left; padding: 30px 15px; }
 #logo h1 a { color: #fff; }
 #logo h1 a span { color: #808080; }
-#menu { height: 44px; padding: 5px 0 0 4px; }
-#menu li { float: left; font-size: 1.3em; text-transform: uppercase; }
-#menu li a { color: #888; margin: 0 50px 0 0; }
-#menu li a.current, #menu li a:hover { color: #fff; }			
-#pitch { clear: both; height: 228px; margin: 0 0 30px; padding: 60px 360px 0 30px; }
-#pitch h1 { font-size: 2.4em; color: #304D6F; margin: 0 0 20px; }
-#pitch em { font-size: 1.3em; font-weight: bold; line-height: 1.6em; }
-.content { background: url(../img/content.gif) repeat; padding: 20px; }
 .link { background: #304D6F; color: #fff; padding: 5px 10px; font-size: .9em; }
 #main { padding: 20px; }
 .col { float: left; width: 292px; margin: 0 30px 15px 0; }
@@ -40,3 +31,18 @@ img { outline: 0; border: 0; }
 #links { float: right; }
 #links a { margin: 0 0 0 10px; }
 #footer p { margin: 0 0 8px; }
+
+/*
+ * Valores personalizados
+ */
+.sinBordes {
+    border: none;
+}
+
+.sinBordes td {
+    border: none;
+}
+
+.sinBordes tr {
+    border: none;
+}
