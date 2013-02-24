@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <f:loadBundle basename="messages" var="msg" />  
+    <c:set var="ruta" value="${rutaBean.ruta}" />
+
+    <f:view contentType="text/html" encoding="UTF-8">
+        <h:head>
+            <title>${msg.tituloMain}</title>            
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta charset="utf-8" />
+            <meta name="Language" content="es" />
+            <meta name="Robots" content="index, follow" />
+            <meta name="MSSmartTagsPreventParsing" content="true" />
+            <meta name="author" content="Sebastián Salazar Molina | Orange People Software Limitada" />
+            <meta name="keywords" content="" />
+            <meta name="description" content="" />
+            <link href="${ruta}/css/main.css" rel="stylesheet" type="text/css" media="screen" />
+            <script src="${ruta}/js/utils.js" type="text/javascript" />
+            <!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/> -->
+        </h:head>
+
+        <h:body>
+
+            <p:outputPanel layout="block" id="container" style="overflow: hidden;">
+
+                <p:outputPanel layout="block" id="headerDiv">
+                    <p:outputPanel layout="block" id="headerLogoDiv">
+                        <p:panelGrid id="headerTable" columns="2" style="width:100%;" columnClasses="leftAlign, rightAlign">
+                            <p:outputPanel layout="block">
+                                <img id="headerLogo" alt="Orange Connect" src="${ruta}/images/orangeconnect_v1_40px.jpg" height="40px"/>
+                            </p:outputPanel>
+                            <p:outputPanel layout="block">
+                                <p:ajaxStatus style="height:30px;" id="ajaxStatusPanel">  
+                                    <f:facet name="start">  
+                                        <p:graphicImage url="/images/ajax-circle-loader.gif"/>
+                                    </f:facet>
+                                    <f:facet name="complete">  
+                                        <h:outputText value="" />
+                                    </f:facet>
+                                </p:ajaxStatus>                                
+                            </p:outputPanel>                            
+                        </p:panelGrid>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td class="leftAlign">
+
+                                </td>
+                                <td class="rightAlign">
+
+                                </td>
+                            </tr>
+                        </table>
+                    </p:outputPanel>
+
+                    <p:outputPanel layout="block" id="headerMenuDiv">
+
+                        <h:form id="headerMenuForm" prependId="false">
+                            <p:toolbar id="headerToolbar">
+                                <p:toolbarGroup align="right">  
+                                    <p:button icon="ui-icon-close" href="/j_spring_security_logout" title="${msg.menuSalir}"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+                        </h:form>
+
+                    </p:outputPanel>
+
+                </p:outputPanel>
+
+
+                <p:outputPanel layout="block" id="content">
+                    <ui:insert name="content" />
+                </p:outputPanel>
+
+
+            </p:outputPanel>
+
+        </h:body>
+
+    </f:view>
+</html>

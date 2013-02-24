@@ -1,0 +1,47 @@
+/* 
+    Document   : signin
+    Created on : 20-12-2012, 01:59:34 PM
+    Author     : Gonzalo Gaete Olivares <ggaete@orangepeople.cl>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+*                       { margin: 0; }
+html, body              { height: 100%; }
+body                    { font-size: 14px; background-color: white; }
+.container              { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -60px; text-align: center; }
+.content                { }
+.footer, .push          { height: 60px; }
+.footer                 { text-align: center; }
+.links                  { width: 100%; border-collapse: separate; border: 0; }
+.mainbox                { display: table; margin: 0 auto; width: 280px; }
+.autotable              { width: 100%; text-align: center; }
+.emptypanel             { border: none; width: 270px; }
+.loadingicon            { width: 100%; height: 16px; }
+
+/* Spacers */
+
+.headerspacer           { height: 50px; }
+.topcontentspacer       { height: 20px; }
+.bottomcontentspacer    { height: 20px; }
+.footerspacer           { height: 30px; }
+.spacer20               { height: 20px; }
+.spacer30               { height: 30px; }
+
+/* Colores para distinguir divs 
+
+body                    { background-color: red; }
+.wrapper                { background-color: blue; }
+.content                { background-color: green; }
+.push                   { background-color: yellow; }
+.footer                 { background-color: red; }
+
+*/
+
+/* Sobreescribo propiedades css de primerfaces */
+
+.ui-panelgrid td    { border: none; }
+.ui-panelgrid tr    { border: none; }
+.ui-widget-content  { background: #EEEEEE; }
+.ui-panel-title     { vertical-align: middle !important; text-align:center; }
+.ui-inputfield      { width: 90%; }

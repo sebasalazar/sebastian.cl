@@ -1,0 +1,204 @@
+/* 
+    Document   : main
+    Created on : 26-12-2012, 12:59:18 PM
+    Author     : Gonzalo Gaete Olivares <ggaete@orangepeople.cl>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/******************/
+/* Layout general */
+/******************/
+
+body {
+    /*background-color: yellow;*/
+    text-align: center; /* center things in pre-IE6 */
+}
+
+#container {
+    width: 1024px;    
+    margin: 25px auto;
+    text-align: left;
+    font-size: 14px;
+    /*background-color: red;*/
+}
+
+#headerDiv {
+    height: 100px;  
+    width: auto;    
+    margin-bottom: 25px;
+    /*background-color: blue;*/
+}
+
+#headerDiv div {
+    width: auto;
+}
+
+#menuDiv {
+    width: 200px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    float: left;
+    /*background-color: green;*/
+}
+
+#menuDiv div {
+    width: auto;
+}
+
+#contentDiv{
+    width: 799px;
+    float: right;
+    margin-bottom: 25px;
+    /*background-color: brown;*/
+}
+
+#contentDiv div{
+    width: auto;
+}
+
+#footerDiv {
+    height: 100px;  
+    width: auto;
+    text-align: center;
+    /*background-color: blue;*/
+    clear: both;    
+}
+
+#footerDiv div {
+    width: auto;
+}
+
+#footerText {
+    margin-top: 25px;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+table#headerTable.ui-panelgrid td {
+    border: none;
+}
+
+table#headerTable.ui-panelgrid tr {
+    border: none;
+}
+
+/**************************/
+/* Panelgrid filtro pagos */
+/**************************/
+
+table#paymentsFilterGrid {
+    width: 300px;
+    margin: auto;
+    font-size: 0.8em;
+}
+
+table#paymentsFilterGrid td {
+    text-align: center;
+}
+
+#ajaxStatusPanel {
+    display: inline;
+}
+
+table#paymentsFilterGrid {
+    width: 300px;
+    margin: auto;
+    font-size: 0.8em;
+}
+
+/***********************/
+/* Detalle transaccion */
+/***********************/
+
+.paymentLogs {
+    width: 100%;
+}
+
+.logsColumn {
+    width: 600px;
+}
+
+div#detailDialog {
+    font-size: 0.8em;
+}
+
+/*******************/
+/* DataTable pagos */
+/*******************/
+
+.ui-datatable .ui-column-filter {
+    display: block;
+    margin: auto;
+    width: 80px;
+}
+
+.ui-datatable td {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.ui-datatable th {
+    font-size: 0.8em;
+}
+
+.ui-datatable .columnpaymentid .ui-column-filter {
+    width: 40px;
+}
+
+.ui-datatable .columnpaymentid {
+    width: 50px;
+}
+
+.ui-datatable .columnpaymentinitday .ui-column-filter {
+    width: 60px;
+}
+
+.ui-datatable .columnpaymentinitday {
+    width: 80px;
+}
+
+.ui-datatable .columnpaymentinithour .ui-column-filter {
+    width: 60px;
+}
+
+.ui-datatable .columnpaymentinithour {
+    width: 80px;
+}
+
+.ui-datatable .columnpaymentinithour .ui-column-filter {
+    width: 60px;
+}
+
+.ui-datatable .columnpaymentinithour {
+    width: 80px;
+}
+
+.ui-datatable .columnpaymentbuyorder .ui-column-filter {
+    width: 100px;
+}
+
+.ui-datatable .columnpaymentbuyorder {
+    width: 100px;
+}
+
+.ui-datatable .columnpaymentamount .ui-column-filter {
+    width: 80px;
+}
+
+.ui-datatable .columnpaymentamount {
+    width: 80px;
+}
+.ui-datatable .columnpaymentstatus .ui-column-filter {
+    width: 120px;
+}
+
+.ui-datatable .columnpaymentstatus {
+    width: 120px;
+}

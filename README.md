@@ -1,4 +1,4 @@
 sebastian.cl
 ============
 
-Web PErsonal
+Personal site

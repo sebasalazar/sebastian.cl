@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="content">
+            <p:panel header="${msg.bienvenido} ${sessionBean.user}">  
+                <h:outputText value="${msg.mensajeBienvenida}" />
+
+                <!--
+                <h:form>
+                    <p:outputPanel>
+                        <p:captcha label="capcha" language="${capchaBean.lang}" theme="clean" />
+                        <p:commandButton ajax="false" 
+                                         actionListener="${capchaBean.submit}" />
+                    </p:outputPanel>
+                </h:form>
+                -->
+            </p:panel> 
+        </ui:define>
+    </ui:composition>
+</html>            

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+    <appender name="DEBUG_APPENDER_MNT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}/debug_maintainer_smartpay.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; %F; %M; %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="debug" />
+            <param name="LevelMax" value="error" />
+        </filter>
+    </appender>
+
+    <appender name="INFO_APPENDER_MNT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}/info_maintainer_smartpay.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="info" />
+            <param name="LevelMax" value="warn" />
+        </filter>
+    </appender>
+
+    <appender name="ERROR_APPENDER_MNT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}/error_maintainer_smartpay.log" />
+        <param name="threshold" value="error" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss,SSS}] %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="cl.smartpay">
+        <level value="DEBUG" />
+        <appender-ref ref="DEBUG_APPENDER_MNT" />
+    </logger>
+    <logger name="cl.orange.smartpay">
+        <level value="DEBUG" />
+        <appender-ref ref="DEBUG_APPENDER_MNT" />
+    </logger>
+
+    <root>
+        <level value="ERROR" />
+        <appender-ref ref="ERROR_APPENDER_MNT" />
+    </root>
+
+</log4j:configuration>

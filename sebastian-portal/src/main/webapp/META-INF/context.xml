@@ -1,0 +1,5 @@
+<Context path="/${project.build.finalName}" reloadable="true"  antiJARLocking="true" antiResourceLocking="true">  
+    <ResourceLink name="jdbc/sebastian"
+                  global="jdbc/sebastian"
+                  type="javax.sql.DataSource" />
+</Context>    

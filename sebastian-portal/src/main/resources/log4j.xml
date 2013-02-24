@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+    <appender name="ROOT_APPENDER_SEBA" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="MaxFileSize" value="200MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <param name="File" value="${path.logs}/sebastian_cl.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; {%C->%M} %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="DEBUG_APPENDER_SEBA" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" /> 
+        <!-- <param name="Append" value="false" /> -->
+        <param name="File" value="${path.logs}/debug_sebastian_cl.log" />
+        <param name="threshold" value="debug" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; {%C->%M} %m%n" />
+        </layout>
+    </appender>
+    
+    <appender name="ERROR_APPENDER_SEBA" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}/error_sebastian_cl.log" />
+        <param name="threshold" value="error" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss,SSS}] {%C->%M} %m%n" />
+        </layout>
+    </appender>
+    
+    <appender name="INFO_APPENDER_SEBA" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}/info_sebastian_cl.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="info" />
+            <param name="LevelMax" value="warn" />
+        </filter>
+    </appender>
+
+    <logger name="cl.sebastian">
+        <level value="DEBUG" />
+        <appender-ref ref="DEBUG_APPENDER_SEBA" />
+        <appender-ref ref="ERROR_APPENDER_SEBA" />
+        <appender-ref ref="INFO_APPENDER_SEBA" />
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="ROOT_APPENDER_SEBA" />
+    </root>
+
+</log4j:configuration>

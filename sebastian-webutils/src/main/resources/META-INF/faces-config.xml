@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- Converters -->
+    <converter id="BaseBeanConverter">
+        <converter-id>BaseBeanConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.BaseBeanConverter</converter-class>
+    </converter>
+    
+    <converter id="TrimConverter">
+        <converter-id>TrimConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.TrimConverter</converter-class>
+    </converter>
+    
+    <converter id="SiNoConverter">
+        <converter-id>SiNoConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.SiNoConverter</converter-class>
+    </converter>
+    
+    <converter id="CleanDateConverter">
+        <converter-id>CleanDateConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.CleanDateConverter</converter-class>
+    </converter>
+
+    <converter id="AmountConverter">
+        <converter-id>AmountConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.AmountConverter</converter-class>
+    </converter>
+    
+    <converter id="LocaleDateConverter">
+        <converter-id>LocaleDateConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.LocaleDateConverter</converter-class>
+    </converter>    
+    
+    <converter id="RutConverter">
+        <converter-id>RutConverter</converter-id>
+        <converter-class>cl.sebastian.webutils.converter.RutConverter</converter-class>
+    </converter>
+</faces-config>

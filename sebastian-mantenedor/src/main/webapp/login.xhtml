@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/simple.xhtml">
+        <ui:define name="content">
+
+            <h:form id="loginForm" prependId="false">
+
+                <p:panel header="${msg.loginTitulo}" styleClass="mainbox">
+
+                    <p:panel styleClass="emptypanel">
+                        <p:messages id="messages" showDetail="false" autoUpdate="true"/>
+                    </p:panel>
+
+                    <p:panelGrid columns="1" styleClass="autotable">                            
+                        <p:outputPanel>
+                            <p:inputText id="j_username" value="${loginBean.user}" required="true" autocomplete="false" 
+                                         converter="TrimConverter" maxlength="128">
+                                <f:validateLength maximum="128"/>
+                            </p:inputText>
+                            <p:watermark for="j_username" value="${msg.usuario}" />
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+                            <p:password id="j_password" value="${loginBean.password}" required="true"
+                                        autocomplete="false" maxlength="64">
+                                <f:validateLength minimum="4" maximum="64"/>                           
+                            </p:password>
+                            <p:watermark for="j_password" value="${msg.contrasena}" />
+                        </p:outputPanel>
+                        
+                        <p:commandButton action="${loginBean.doLogin}" value="${msg.loginBoton}" ajax="false" />
+                    </p:panelGrid>
+
+                </p:panel>
+
+                <p class="spacer30"></p>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>

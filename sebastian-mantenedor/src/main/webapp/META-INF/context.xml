@@ -1,0 +1,8 @@
+<Context path="/${project.build.finalName}" reloadable="true"  antiJARLocking="true" antiResourceLocking="true">  
+    <ResourceLink name="jdbc/ocSandbox"
+                  global="jdbc/ocSandbox"
+                  type="javax.sql.DataSource" />
+    <ResourceLink name="jdbc/ocProduction"
+                  global="jdbc/ocProduction"
+                  type="javax.sql.DataSource" />
+</Context>    

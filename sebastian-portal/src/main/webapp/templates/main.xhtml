@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      lang="${sebaBean.idioma}" xml:lang="${sebaBean.idioma}">
+
+    <f:loadBundle basename="messages" var="msg" />
+
+    <f:view contentType="text/html" encoding="UTF-8">
+
+        <h:head>
+            <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+            <meta name="Language" content="${sebaBean.idioma}" />
+            <meta name="Robots" content="index, follow" />
+            <meta name="MSSmartTagsPreventParsing" content="true" />
+            <meta name="author" content="Sebastián Salazar Molina" />
+            <meta name="keywords" content="${msg.metaKeywords}" />
+            <meta name="description" content="${msg.metaDescription}" />
+            <link rel="stylesheet" type="text/css" href="css/estilo.css" media="screen" />
+            <title>${msg.titulo}</title>
+        </h:head>
+
+        <h:body>
+            <div id="wrapper">
+                <div id="header">
+                    <div id="logo">
+                        <h1><a href="${sebaBean.ruta}/">${msg.titulo}</a></h1>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="content">
+                    <!--
+                    <ul id="menu">
+                        <li><a class="current" href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a></li>
+                        <li><a href="#">Practice</a></li>
+                        <li><a href="#">Attorneys</a></li>
+                        <li><a href="#">Accidents</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                    -->
+                    <h:form prependId="false">
+                        <p:tabMenu activeIndex="0">
+                            <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home" />
+                        </p:tabMenu>
+                    </h:form>
+
+                    <div id="contenido">
+                        <ui:insert name="contenido" />
+                        <div class="clr"></div>
+                    </div>
+                </div>
+
+                <div id="footer">
+                    <p id="links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Use</a>
+                    </p>
+                    <p>
+                        <a href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a>
+                        <a href="#">Practice</a>
+                        <a href="#">Attorneys</a>
+                        <a href="#">Accidents</a>
+                        <a href="#">News</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact Us</a>
+                    </p>
+                    <p>Copyright &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="Free CSS Templates">Solucija</a> &#172; <a href="http://www.lawyermarketinggroup.com/">Law Firm Marketing</a></p>
+                </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>

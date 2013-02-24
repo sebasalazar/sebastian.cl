@@ -1,0 +1,12 @@
+<Context>  
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <Resource name="jdbc/ocSandbox" auth="Container" type="javax.sql.DataSource"
+              driverClassName="${jdbc.driver}" url="${jdbc.url}"
+              username="${jdbc.sandbox.username}" password="${jdbc.sandbox.password}" maxActive="20" maxIdle="10" maxWait="-1"
+     />
+    <Resource name="jdbc/ocProduction" auth="Container" type="javax.sql.DataSource"
+              driverClassName="${jdbc.driver}" url="${jdbc.url}"
+              username="${jdbc.production.username}" password="${jdbc.production.password}" maxActive="20" maxIdle="10" maxWait="-1"
+     />
+</Context>    

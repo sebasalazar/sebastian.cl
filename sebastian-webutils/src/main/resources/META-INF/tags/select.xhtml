@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition>
+        <p:outputLabel for="${id}" value="${label}"/>
+        <p:selectOneMenu id="${id}" value="${value}" converter="BaseBeanConverter" required="${required}"
+                         style="${style}" styleClass="${styleClass}">
+            <c:if test="${(not empty defaultLabel)}">
+                <f:selectItem itemValue="${null}" itemLabel="${defaultLabel}" />
+            </c:if>
+            <ui:insert />
+        </p:selectOneMenu>
+        <p:message for="${id}" showDetail="false" showSummary="true" display="icon" />
+    </ui:composition>
+</html>
