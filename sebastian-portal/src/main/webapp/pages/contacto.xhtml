@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:seba="http://sebastian.cl/jsf">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="contenido">
+
+            <p:panel header="${msg.contacto}">
+                <h:outputText escape="false" value="${msg.mensajeContacto}" />
+
+                <h:form prependId="false">
+                    
+                    <p:growl autoUpdate="true" />
+                    
+                    <p:panelGrid columns="3" styleClass="sinBordes">
+                        <seba:inputtext id="nombre" label="${msg.nombre}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.nombre}" />
+
+                        <seba:inputtext id="email" label="${msg.email}" maxLength="255" maxSize="255" minLength="4" 
+                                        required="true" value="${contactoBean.email}" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                        <seba:inputtext id="asunto" label="${msg.asunto}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.asunto}" />
+
+                        <seba:textarea id="mensaje" label="${msg.mensaje}" required="true" value="${contactoBean.mensaje}" />
+
+                        <seba:captcha lang="${sebaBean.idioma}" />
+                    </p:panelGrid>
+
+                    <p:commandButton actionListener="${contactoBean.enviarMail}" value="${msg.enviar}" ajax="false" />
+                </h:form>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+</html>

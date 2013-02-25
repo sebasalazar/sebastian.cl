@@ -25,7 +25,7 @@
 
         <h:body>
             <div id="wrapper">
-                <div id="header">
+                <div id="hteader">
                     <div id="logo">
                         <h1><a href="${sebaBean.ruta}/">${msg.titulo}</a></h1>
                     </div>
@@ -36,6 +36,7 @@
                     <h:form prependId="false">
                         <p:tabMenu activeIndex="0">
                             <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home" />
+                            <p:menuitem value="${msg.contacto}" url="/pages/contacto.jsf" icon="ui-icon-mail-closed" />
                         </p:tabMenu>
                     </h:form>
 
@@ -49,17 +50,13 @@
 
                 <div id="footer">
                     <p id="links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Use</a>
+                        <a href="#">Sebastián Salazar Molina</a>
+                        <a href="#">${sebaBean.year}</a>
                     </p>
                     <p>
                         <a href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a>
-                        <a href="#">Practice</a>
-                        <a href="#">Attorneys</a>
-                        <a href="#">Accidents</a>
-                        <a href="#">News</a>
                         <a href="${sebaBean.ruta}/pages/acerca.jsf">${msg.acerca}</a>
-                        <a href="#">Contact Us</a>
+                        <a href="${sebaBean.ruta}/pages/contacto.jsf">${msg.contacto}</a>
                     </p>
                     <p>${msg.derechoReservados} &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="${msg.acerca}">${msg.acerca}</a></p>
                 </div>
