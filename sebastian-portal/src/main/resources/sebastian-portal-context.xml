@@ -33,4 +33,10 @@
             </map>
         </property>
     </bean>
+    
+    <!-- Integración propia -->
+    <bean id="correoContacto" class="java.lang.String">
+        <constructor-arg value="${correoContacto}" />
+    </bean>
+
 </beans>

@@ -33,10 +33,15 @@
                 </div>
                 <div class="contenido">
 
-                    <h:form prependId="false">
-                        <p:tabMenu activeIndex="0">
-                            <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home" />
-                            <p:menuitem value="${msg.contacto}" url="/pages/contacto.jsf" icon="ui-icon-mail-closed" />
+                    <h:form id="menuTab" prependId="false">
+                        <p:tabMenu activeIndex="${menuBean.activeMenuIndex}">
+                            <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home">
+                                <f:setPropertyActionListener target="${menuBean.activeMenuIndex}" value="0" />
+                            </p:menuitem>
+
+                            <p:menuitem value="${msg.contacto}" url="/pages/contacto.jsf" icon="ui-icon-mail-closed">
+                                <f:setPropertyActionListener target="${menuBean.activeMenuIndex}" value="1" />
+                            </p:menuitem>
                         </p:tabMenu>
                     </h:form>
 

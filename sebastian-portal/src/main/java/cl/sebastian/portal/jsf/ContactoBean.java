@@ -1,6 +1,7 @@
 package cl.sebastian.portal.jsf;
 
 import cl.sebastian.servicio.ServicioEmail;
+import cl.sebastian.webutils.utils.FacesUtils;
 import java.io.Serializable;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 @Qualifier("contactoBean")
 public class ContactoBean implements Serializable {
 
+    @Resource(name = "correoContacto")
+    private String correoContacto = null;
     @Resource(name = "servicioEmail")
     private ServicioEmail servicioEmail = null;
     private String nombre = null;
@@ -28,7 +31,14 @@ public class ContactoBean implements Serializable {
 
     public void enviarMail() {
         try {
-            
+            String from = nombre + " <" + email + ">";
+            boolean sendMail = servicioEmail.sendMail(correoContacto, from, asunto, mensaje);
+            if (sendMail) {
+                FacesUtils.infoMessage("correoEnviado");
+            } else {
+                FacesUtils.errorMessage("correoNoEnviado");
+            }
+
         } catch (Exception e) {
             logger.error(e.toString());
             logger.debug("Error al enviar email", e);
