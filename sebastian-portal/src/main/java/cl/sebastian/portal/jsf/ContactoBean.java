@@ -21,6 +21,8 @@ public class ContactoBean implements Serializable {
 
     @Resource(name = "correoContacto")
     private String correoContacto = null;
+    @Resource(name = "mailCartero")
+    private String mailCartero = null;
     @Resource(name = "servicioEmail")
     private ServicioEmail servicioEmail = null;
     private String nombre = null;
@@ -32,7 +34,9 @@ public class ContactoBean implements Serializable {
     public void enviarMail() {
         try {
             String from = nombre + " <" + email + ">";
-            boolean sendMail = servicioEmail.sendMail(correoContacto, from, asunto, mensaje);
+            String nuevoAsunto = "[sebastian.cl] " + asunto;
+            String nuevoMensaje = from + " Escribío \\r\\n" + mensaje;
+            boolean sendMail = servicioEmail.sendMail(correoContacto, mailCartero, nuevoAsunto, nuevoMensaje);
             if (sendMail) {
                 FacesUtils.infoMessage("correoEnviado");
             } else {

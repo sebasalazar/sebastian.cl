@@ -75,4 +75,9 @@
         <property name="javaMailProperties" value="${mail.javaMailProperties}" />
     </bean>
 
+    <!-- Integración propia -->
+    <bean id="mailCartero" class="java.lang.String">
+        <constructor-arg value="${mailCartero}" />
+    </bean>
+
 </beans>
