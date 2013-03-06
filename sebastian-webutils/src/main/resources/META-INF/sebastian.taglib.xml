@@ -52,6 +52,7 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    
     <tag>
         <tag-name>outputtext</tag-name>
         <source>tags/outputtext.xhtml</source>
@@ -74,6 +75,7 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    
     <tag>
         <tag-name>inputtext</tag-name>
         <source>tags/inputtext.xhtml</source>
@@ -138,6 +140,7 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    
     <tag>
         <tag-name>inputnumber</tag-name>
         <source>tags/inputnumber.xhtml</source>
@@ -172,6 +175,7 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
+    
     <tag>
         <tag-name>password</tag-name>
         <source>tags/password.xhtml</source>
@@ -281,5 +285,16 @@
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>        
+    </tag>
+    
+    <tag>
+        <tag-name>code</tag-name>
+        <source>tags/code.xhtml</source>
+        <attribute>
+            <name>lang</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 </facelet-taglib>

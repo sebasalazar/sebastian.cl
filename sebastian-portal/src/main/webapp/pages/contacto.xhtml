@@ -8,29 +8,31 @@
     <ui:composition template="/templates/main.xhtml">
         <ui:define name="contenido">
 
-            <p:panel header="${msg.contacto}">
-                <h:outputText escape="false" value="${msg.mensajeContacto}" />
+            <p:outputPanel id="contacto">
 
-                <h:form prependId="false">
-                    
-                    <p:growl autoUpdate="true" />
-                    
-                    <p:panelGrid columns="3" styleClass="sinBordes">
-                        <seba:inputtext id="nombre" label="${msg.nombre}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.nombre}" />
+                <p:panel header="${msg.contacto}">
+                    <h:outputText escape="false" value="${msg.mensajeContacto}" />
 
-                        <seba:inputtext id="email" label="${msg.email}" maxLength="255" maxSize="255" minLength="4" 
-                                        required="true" value="${contactoBean.email}" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    <h:form prependId="false">
 
-                        <seba:inputtext id="asunto" label="${msg.asunto}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.asunto}" />
+                        <p:panelGrid columns="3" styleClass="sinBordes">
+                            <seba:inputtext id="nombre" label="${msg.nombre}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.nombre}" />
 
-                        <seba:textarea id="mensaje" label="${msg.mensaje}" required="true" value="${contactoBean.mensaje}" />
+                            <seba:inputtext id="email" label="${msg.email}" maxLength="255" maxSize="255" minLength="4" 
+                                            required="true" value="${contactoBean.email}" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 
-                        <seba:captcha lang="${sebaBean.idioma}" />
-                    </p:panelGrid>
+                            <seba:inputtext id="asunto" label="${msg.asunto}" maxLength="255" maxSize="255" minLength="4" required="true" value="${contactoBean.asunto}" />
 
-                    <p:commandButton actionListener="${contactoBean.enviarMail}" value="${msg.enviar}" ajax="false" />
-                </h:form>
-            </p:panel>
+                            <seba:textarea id="mensaje" label="${msg.mensaje}" required="true" value="${contactoBean.mensaje}" />
+
+                            <seba:captcha lang="${sebaBean.idioma}" />
+                        </p:panelGrid>
+
+                        <p:commandButton actionListener="${contactoBean.enviarMail}" value="${msg.enviar}" ajax="false" />
+                    </h:form>
+                </p:panel>
+
+            </p:outputPanel>
 
         </ui:define>
     </ui:composition>

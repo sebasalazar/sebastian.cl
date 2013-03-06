@@ -10,6 +10,7 @@ h3 { font: normal 1.4em "Trebuchet MS", Helvetica, Arial; margin: 0 0 20px; }
 h4 { font: normal 1.2em "Trebuchet MS", Helvetica, Arial; color: #dfdfdf; margin: 0 0 4px; }
 p { margin: 0 0 15px; line-height: 1.6em; }
 a { outline: 0; color: #304D6F; text-decoration: none; }
+a:hover { color: #0099E0; text-decoration: underline; font-weight: bolder; }
 li { list-style: none; }
 li a, img { display: block; }
 img { outline: 0; border: none; }
@@ -45,4 +46,18 @@ img { outline: 0; border: none; }
 
 .sinBordes tr {
     border: none;
+}
+
+.tituloLogo {
+    /* cambiar por nuevo gravatar */
+    background-image: url('http://www.gravatar.com/avatar/12a48943f7ee44b4de28f77307fb8a82.png');
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    height: 80px;
+}
+
+.tituloLogo a:hover { text-decoration: none; }
+
+.ui-widget-content a {
+    color: #0099E0;
 }

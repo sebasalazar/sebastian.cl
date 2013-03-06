@@ -19,21 +19,24 @@ import org.springframework.stereotype.Component;
 @Qualifier("menuBean")
 public class MenuBean implements Serializable {
 
+    public final static int MENU_HOME = 0;
+    public final static int MENU_CONTACTO = 1;
+    public final static int MENU_ERROR = -1;
     private Integer activeMenuIndex = null;
     private static Logger logger = LoggerFactory.getLogger(MenuBean.class);
 
     @PostConstruct
     public void iniciar() {
         try {
-            
+
             // Esto depende del orden que coloquemos los menus
             String viewId = FacesUtils.getFacesContext().getViewRoot().getViewId();
             if (StringUtils.contains(viewId, "index")) {
-                activeMenuIndex = 0;
+                activeMenuIndex = MENU_HOME;
             } else if (StringUtils.contains(viewId, "contacto")) {
-                activeMenuIndex = 1;
+                activeMenuIndex = MENU_CONTACTO;
             } else {
-                activeMenuIndex = -1;
+                activeMenuIndex = MENU_ERROR;
             }
         } catch (Exception e) {
             activeMenuIndex = -1;

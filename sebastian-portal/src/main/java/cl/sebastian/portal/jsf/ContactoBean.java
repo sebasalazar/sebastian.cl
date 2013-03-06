@@ -1,7 +1,6 @@
 package cl.sebastian.portal.jsf;
 
 import cl.sebastian.portal.servicio.ServicioEnvioCorreo;
-import cl.sebastian.servicio.ServicioEmail;
 import cl.sebastian.webutils.utils.FacesUtils;
 import java.io.Serializable;
 import javax.annotation.Resource;
@@ -26,15 +25,21 @@ public class ContactoBean implements Serializable {
     private String email = null;
     private String asunto = null;
     private String mensaje = null;
+    private boolean procesado = false;
+    private boolean mailOk = false;
+    private String titulo = null;
+    private String texto = null;
     private static Logger logger = LoggerFactory.getLogger(ContactoBean.class);
 
     public void enviarMail() {
         try {
+            procesado = true;
             boolean sendMail = servicioEnvioCorreo.enviarCorreoContacto(nombre, email, asunto, mensaje);
             if (sendMail) {
-                FacesUtils.infoMessage("correoEnviado");
+                mailOk = true;
+                texto = FacesUtils.getFormattedMessage("correoEnviado");
             } else {
-                FacesUtils.errorMessage("correoNoEnviado");
+                texto = FacesUtils.getFormattedMessage("correoNoEnviado");
             }
         } catch (Exception e) {
             logger.error(e.toString());
@@ -72,5 +77,21 @@ public class ContactoBean implements Serializable {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public boolean isProcesado() {
+        return procesado;
+    }
+
+    public void setProcesado(boolean procesado) {
+        this.procesado = procesado;
+    }
+
+    public boolean isMailOk() {
+        return mailOk;
+    }
+
+    public void setMailOk(boolean mailOk) {
+        this.mailOk = mailOk;
     }
 }

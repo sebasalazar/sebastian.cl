@@ -43,6 +43,7 @@ public class ServicioEnvioCorreoImpl implements ServicioEnvioCorreo, Serializabl
 
             String subject = "[sebastian.cl] " + asunto;
             String message = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, lang + "/contacto.vm", datos);
+            logger.debug(message);
             resultado = servicioEmail.sendMail(correoContacto, mailCartero, subject, message);
         } catch (Exception e) {
             logger.error(e.toString());

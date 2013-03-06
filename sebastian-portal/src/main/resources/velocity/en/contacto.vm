@@ -254,7 +254,7 @@
                                                         <td valign="top">
                                                             <div mc:edit="std_content00">
                                                                 <h3 class="h3">$asunto</h3>
-                                                                <h4 class="h4">$nombre <$email></h4>
+                                                                <h4 class="h4">$nombre $email </h4>
                                                                 <p>
                                                                     $mensaje
                                                                 </p>
