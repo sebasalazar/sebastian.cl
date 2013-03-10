@@ -24,39 +24,17 @@
     </bean>
     
     <context:annotation-config />    
-    <context:component-scan base-package="cl.orange.smartpay.maintainer" />
+    <context:component-scan base-package="cl.sebastian.mantenedor" />
 
     <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
         <property name="scopes">
             <map>
                 <entry key="view">
-                    <bean class="cl.orange.smartpay.maintainer.jsf.ViewScope" />
+                    <bean class="cl.sebastian.mantenedor.jsf.ViewScope" />
                 </entry>
             </map>
         </property>
     </bean>
-    
-    <!-- Exception Resolver -->
-    <bean id="maintainerErrorResolver"  class="cl.orange.smartpay.maintainer.spring.MaintainerErrorResolver"/>
-
-    <bean name="loggingAutoProxy"  class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-        <property name="beanNames" value="*Bean" />
-        <property name="proxyTargetClass" value="true" />
-        <property name="interceptorNames">
-            <list>
-                <value>maintainerErrorResolver</value>
-            </list>
-        </property>
-    </bean>    
-
-    <!-- Listado de errores -->
-    <util:map id="maintainerErrorCodes">
-        <entry key="GENERIC_ERROR" value="registroErrorGenericoRegistro" />
-        <entry key="ALREADY_REGISTERED" value="registroErrorYaRegistrado" />
-        <entry key="PENDING_REGISTRATION" value="registroErrorRegistroPendiente" />
-        <entry key="PENDING_INVITATION" value="registroErrorInvitacionPendiente" />
-        <entry key="REGISTRATION_TOKEN_NOT_FOUND" value="registroErrorTokenNoExiste" />
-    </util:map>
     
     <!-- Spring Security 3.1 -->
     <security:http pattern="/css/**" security="none" />

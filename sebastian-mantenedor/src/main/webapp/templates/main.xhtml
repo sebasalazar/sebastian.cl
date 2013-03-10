@@ -5,83 +5,84 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      lang="${sebaBean.idioma}" xml:lang="${sebaBean.idioma}">
 
-    <f:loadBundle basename="messages" var="msg" />  
-    <c:set var="ruta" value="${rutaBean.ruta}" />
+    <f:loadBundle basename="messages" var="msg" />
 
     <f:view contentType="text/html" encoding="UTF-8">
+
         <h:head>
-            <title>${msg.tituloMain}</title>            
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta charset="utf-8" />
-            <meta name="Language" content="es" />
+            <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+            <meta name="Language" content="${sebaBean.idioma}" />
             <meta name="Robots" content="index, follow" />
             <meta name="MSSmartTagsPreventParsing" content="true" />
-            <meta name="author" content="Sebastián Salazar Molina | Orange People Software Limitada" />
-            <meta name="keywords" content="" />
-            <meta name="description" content="" />
-            <link href="${ruta}/css/main.css" rel="stylesheet" type="text/css" media="screen" />
-            <script src="${ruta}/js/utils.js" type="text/javascript" />
-            <!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/> -->
+            <meta name="author" content="Sebastián Salazar Molina" />
+            <meta name="keywords" content="${msg.metaKeywords}" />
+            <meta name="description" content="${msg.metaDescription}" />
+            <link rel="stylesheet" type="text/css" href="${sebaBean.ruta}/css/estilo.css" media="screen" />
+
+            <!-- Resaltador de Syntaxis -->
+            <link rel="stylesheet" type="text/css" href="${sebaBean.ruta}/css/shThemeMDUltra.css" media="screen" />
+            
+            <title>${msg.titulo}</title>
         </h:head>
 
         <h:body>
-
-            <p:outputPanel layout="block" id="container" style="overflow: hidden;">
-
-                <p:outputPanel layout="block" id="headerDiv">
-                    <p:outputPanel layout="block" id="headerLogoDiv">
-                        <p:panelGrid id="headerTable" columns="2" style="width:100%;" columnClasses="leftAlign, rightAlign">
-                            <p:outputPanel layout="block">
-                                <img id="headerLogo" alt="Orange Connect" src="${ruta}/images/orangeconnect_v1_40px.jpg" height="40px"/>
-                            </p:outputPanel>
-                            <p:outputPanel layout="block">
-                                <p:ajaxStatus style="height:30px;" id="ajaxStatusPanel">  
-                                    <f:facet name="start">  
-                                        <p:graphicImage url="/images/ajax-circle-loader.gif"/>
-                                    </f:facet>
-                                    <f:facet name="complete">  
-                                        <h:outputText value="" />
-                                    </f:facet>
-                                </p:ajaxStatus>                                
-                            </p:outputPanel>                            
-                        </p:panelGrid>
-                        <table style="width: 100%;">
-                            <tr>
-                                <td class="leftAlign">
-
-                                </td>
-                                <td class="rightAlign">
-
-                                </td>
-                            </tr>
-                        </table>
+            <div id="wrapper">
+                <div id="hteader">
+                    <p:outputPanel id="logo">
+                        <h1 class="tituloLogo"><a href="${sebaBean.ruta}/">${msg.titulo}</a></h1>
                     </p:outputPanel>
+                    <div class="clr"></div>
+                </div>
+                <div class="contenido">
 
-                    <p:outputPanel layout="block" id="headerMenuDiv">
+                    <h:form id="menuTab" prependId="false">
+                        <p:tabMenu activeIndex="${menuBean.activeMenuIndex}">
 
-                        <h:form id="headerMenuForm" prependId="false">
-                            <p:toolbar id="headerToolbar">
-                                <p:toolbarGroup align="right">  
-                                    <p:button icon="ui-icon-close" href="/j_spring_security_logout" title="${msg.menuSalir}"/>
-                                </p:toolbarGroup>
-                            </p:toolbar>
-                        </h:form>
+                            <p:menuitem value="${msg.menuInicio}" url="/pages/index.jsf" icon="ui-icon-home" update=":menuTab" />
 
-                    </p:outputPanel>
+                            <p:menuitem value="${msg.contacto}" url="/pages/contacto.jsf" icon="ui-icon-mail-closed" update=":menuTab" />
+                        </p:tabMenu>
+                    </h:form>
 
-                </p:outputPanel>
+                    <br />
+
+                    <div id="cuerpo">
+                        <ui:insert name="contenido" />
+                        <div class="clr"></div>
+                    </div>
+                </div>
+
+                <div id="footer">
+                    <p id="links">
+                        <a href="#">Sebastián Salazar Molina</a>
+                        <a href="#">${sebaBean.year}</a>
+                    </p>
+                    <p>
+                        <a href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a>
+                        <a href="${sebaBean.ruta}/pages/acerca.jsf">${msg.acerca}</a>
+                        <a href="${sebaBean.ruta}/pages/contacto.jsf">${msg.contacto}</a>
+                    </p>
+                    <p>${msg.derechoReservados} &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="${msg.acerca}">${msg.acerca}</a></p>
+                </div>
+            </div>
 
 
-                <p:outputPanel layout="block" id="content">
-                    <ui:insert name="content" />
-                </p:outputPanel>
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-38760509-1']);
+                _gaq.push(['_trackPageview']);
 
-
-            </p:outputPanel>
-
+                (function() {
+                    var ga = document.createElement('script');
+                    ga.type = 'text/javascript';
+                    ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
         </h:body>
-
     </f:view>
 </html>
