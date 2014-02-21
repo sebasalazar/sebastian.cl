@@ -1,21 +1,24 @@
 package cl.sebastian.mantenedor.jsf;
 
+import cl.sebastian.mantenedor.servicio.ServicioAutenticacion;
 import cl.sebastian.webutils.utils.FacesUtils;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.annotation.Resource;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 @Component
@@ -23,16 +26,17 @@ import org.springframework.stereotype.Component;
 @Qualifier("loginBean")
 public class LoginBean implements Serializable {
 
-    private static org.slf4j.Logger logger = LoggerFactory.getLogger(LoginBean.class);
+    @Resource(name = "servicioAutenticacion")
+    private ServicioAutenticacion servicioAutenticacion;
     private String password = null;
     private String user = null;
+    private static final Logger logger = LoggerFactory.getLogger(LoginBean.class);
 
     public String doLogin() throws IOException, ServletException {
         String resultado = null;
 
         try {
-            boolean ok = false;
-            // boolean ok = maintainerAuthenticationService.isAuthenticated(user, password);
+            boolean ok = servicioAutenticacion.isAutenticado(user, password);
             if (ok) {
                 ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 
@@ -46,7 +50,7 @@ public class LoginBean implements Serializable {
                 FacesUtils.errorMessage("badPassword");
             }
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("Problema al hacer login: {}", e.toString());
             logger.debug("Problema al hacer login", e);
         }
         return resultado;

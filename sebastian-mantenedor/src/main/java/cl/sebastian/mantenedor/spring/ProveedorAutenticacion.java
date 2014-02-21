@@ -25,8 +25,8 @@ import org.springframework.stereotype.Service;
 public class ProveedorAutenticacion implements AuthenticationProvider {
 
     @Resource(name = "servicioAutenticacion")
-    private ServicioAutenticacion servicioAutenticacion = null;
-    private static Logger logger = LoggerFactory.getLogger(ProveedorAutenticacion.class);
+    private ServicioAutenticacion servicioAutenticacion;
+    private static final Logger logger = LoggerFactory.getLogger(ProveedorAutenticacion.class);
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

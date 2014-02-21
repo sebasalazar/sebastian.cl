@@ -38,18 +38,16 @@
         </layout>
     </appender>
 
-    <logger name="cl.smartpay">
+    <logger name="cl.sebastian">
         <level value="DEBUG" />
         <appender-ref ref="DEBUG_APPENDER_MNT" />
-    </logger>
-    <logger name="cl.orange.smartpay">
-        <level value="DEBUG" />
-        <appender-ref ref="DEBUG_APPENDER_MNT" />
+        <appender-ref ref="ERROR_APPENDER_MNT" />
+        <appender-ref ref="INFO_APPENDER_MNT" />
     </logger>
 
     <root>
-        <level value="ERROR" />
-        <appender-ref ref="ERROR_APPENDER_MNT" />
+        <level value="DEBUG" />
+        <appender-ref ref="ROOT_APPENDER_MNT" />
     </root>
 
 </log4j:configuration>

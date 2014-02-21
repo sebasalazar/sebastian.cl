@@ -13,16 +13,16 @@
 
         <h:head>
             <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-            <meta name="Language" content="${sebaBean.idioma}" />
+            <meta name="Language" content="#{sebaBean.idioma}" />
             <meta name="Robots" content="index, follow" />
             <meta name="MSSmartTagsPreventParsing" content="true" />
             <meta name="author" content="Sebastián Salazar Molina" />
             <meta name="keywords" content="${msg.metaKeywords}" />
             <meta name="description" content="${msg.metaDescription}" />
-            <link rel="stylesheet" type="text/css" href="${sebaBean.ruta}/css/estilo.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="#{sebaBean.ruta}/css/estilo.css" media="screen" />
 
             <!-- Resaltador de Syntaxis -->
-            <link rel="stylesheet" type="text/css" href="${sebaBean.ruta}/css/shThemeMDUltra.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="#{sebaBean.ruta}/css/shThemeMDUltra.css" media="screen" />
             
             <title>${msg.titulo}</title>
         </h:head>
@@ -31,7 +31,7 @@
             <div id="wrapper">
                 <div id="hteader">
                     <p:outputPanel id="logo">
-                        <h1 class="tituloLogo"><a href="${sebaBean.ruta}/">${msg.titulo}</a></h1>
+                        <h1 class="tituloLogo"><a href="#{sebaBean.ruta}/">${msg.titulo}</a></h1>
                     </p:outputPanel>
                     <div class="clr"></div>
                 </div>
@@ -57,14 +57,14 @@
                 <div id="footer">
                     <p id="links">
                         <a href="#">Sebastián Salazar Molina</a>
-                        <a href="#">${sebaBean.year}</a>
+                        <a href="#">#{sebaBean.year}</a>
                     </p>
                     <p>
-                        <a href="${sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a>
-                        <a href="${sebaBean.ruta}/pages/acerca.jsf">${msg.acerca}</a>
-                        <a href="${sebaBean.ruta}/pages/contacto.jsf">${msg.contacto}</a>
+                        <a href="#{sebaBean.ruta}/pages/index.jsf">${msg.menuInicio}</a>
+                        <a href="#{sebaBean.ruta}/pages/acerca.jsf">${msg.acerca}</a>
+                        <a href="#{sebaBean.ruta}/pages/contacto.jsf">${msg.contacto}</a>
                     </p>
-                    <p>${msg.derechoReservados} &#169; ${sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="${sebaBean.ruta}/pages/acerca.jsf" title="${msg.acerca}">${msg.acerca}</a></p>
+                    <p>${msg.derechoReservados} &#169; #{sebaBean.year} &#8722; Sebastián Salazar Molina &#183; <a href="#{sebaBean.ruta}/pages/acerca.jsf" title="${msg.acerca}">${msg.acerca}</a></p>
                 </div>
             </div>
 

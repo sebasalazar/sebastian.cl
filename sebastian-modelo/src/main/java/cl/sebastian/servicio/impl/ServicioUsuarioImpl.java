@@ -1,8 +1,8 @@
 package cl.sebastian.servicio.impl;
 
 import cl.sebastian.modelo.Usuario;
-import cl.sebastian.repositorio.UsuarioRepository;
-import cl.sebastian.servicio.ServicioAutenticacion;
+import cl.sebastian.repository.UsuarioRepository;
+import cl.sebastian.servicio.ServicioUsuario;
 import java.io.Serializable;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
  *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
-@Service("servicioAutenticacion")
-public class ServicioAutenticacionImpl implements ServicioAutenticacion, Serializable {
+@Service("servicioUsuario")
+public class ServicioUsuarioImpl implements ServicioUsuario, Serializable {
 
     @Resource(name = "usuarioRepository")
     private UsuarioRepository usuarioRepository;
-    private static final Logger logger = LoggerFactory.getLogger(ServicioAutenticacionImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServicioUsuarioImpl.class);
 
     public boolean isAutenticado(String usuario, String contrasena) {
         boolean resultado = false;

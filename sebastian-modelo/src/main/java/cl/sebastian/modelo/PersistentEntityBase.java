@@ -15,7 +15,7 @@ public abstract class PersistentEntityBase extends EntityBase {
 
     private static final long serialVersionUID = 2202015144287538980L;
     @Id
-    @Column(name = "id")
+    @Column(name = "pk")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 

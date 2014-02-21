@@ -33,7 +33,7 @@
     <context:component-scan base-package="cl.sebastian" />    
 
 
-    <jpa:repositories base-package="cl.sebastian.repositorio" />
+    <jpa:repositories base-package="cl.sebastian.repository" />
     
     <tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -46,10 +46,15 @@
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
           p:jpaVendorAdapter-ref="jpaAdapter">
-
         <property name="persistenceUnitName" value="sebastianPU" />
-
         <property name="persistenceXmlLocation" value="classpath*:META-INF/sebastian-pu.xml" />
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.format_sql">${jpa.format.sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="jpaAdapter"

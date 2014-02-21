@@ -1,4 +1,4 @@
-package cl.sebastian.repositorio;
+package cl.sebastian.repository;
 
 import cl.sebastian.modelo.Usuario;
 import javax.annotation.Resource;
