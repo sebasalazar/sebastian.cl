@@ -5,18 +5,18 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang.SerializationUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public class BaseBeanConverter implements Converter {
 
-    private static Logger logger = LoggerFactory.getLogger(BaseBeanConverter.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseBeanConverter.class);
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
@@ -29,7 +29,7 @@ public class BaseBeanConverter implements Converter {
         } catch (Exception e) {
             logger.error(e.toString());
             logger.debug("Error al convertir string : " + string + " ex: "
-                    + ExceptionUtils.getFullStackTrace(e));
+                    + ExceptionUtils.getStackTrace(e));
         }
 
         return result;
@@ -44,7 +44,7 @@ public class BaseBeanConverter implements Converter {
         } catch (Exception ex) {
             logger.error(ex.toString());
             logger.debug("Error al convertir objeto : " + o + " ex: "
-                    + ExceptionUtils.getFullStackTrace(ex));
+                    + ExceptionUtils.getStackTrace(ex));
         }
         return result;
     }

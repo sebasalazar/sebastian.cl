@@ -1,6 +1,8 @@
 package cl.sebastian.modelo;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -14,7 +16,8 @@ public abstract class PersistentEntityBase extends EntityBase {
     private static final long serialVersionUID = 2202015144287538980L;
     @Id
     @Column(name = "id")
-    private Long id = 0L;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id = null;
 
     /**
      * Obtiene el id unico del objeto

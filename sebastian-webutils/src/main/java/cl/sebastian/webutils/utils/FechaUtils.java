@@ -7,21 +7,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public abstract class FechaUtils {
 
-    private static Logger logger = LoggerFactory.getLogger(FechaUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(FechaUtils.class);
 
     public static Date getFecha(int anio, int mes, int dia) {
-        Date fecha = new Date();
+        Date fecha = null;
         try {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(fecha);
@@ -34,9 +33,8 @@ public abstract class FechaUtils {
             calendar.set(Calendar.MILLISECOND, 0);
             fecha = calendar.getTime();
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener fecha: {}", e.toString());
         }
         return fecha;
     }
@@ -53,15 +51,15 @@ public abstract class FechaUtils {
 
         } catch (Exception e) {
             result = false;
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            logger.error("Error al validar hora en fecha: {}", e.toString());
         }
         return result;
     }
 
     public static Date getPrimeraHora() {
-        Date fecha = new Date();
+        Date fecha = null;
         try {
+            fecha = new Date();
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(fecha);
             calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -70,53 +68,55 @@ public abstract class FechaUtils {
             calendar.set(Calendar.MILLISECOND, 0);
             fecha = calendar.getTime();
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener Primera hora del día: {}", e.toString());
         }
         return fecha;
     }
 
-    public static Date getPrimeraHora(Date date) {
-        Date fecha = new Date();
+    public static Date getPrimeraHora(Date dia) {
+        Date fecha = null;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            fecha = calendar.getTime();
+            if (dia != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(dia);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                fecha = calendar.getTime();
+            }
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener Primera hora del día: {}", e.toString());
         }
         return fecha;
     }
 
-    public static Date getPrimeraHoraPrevia(Date date, int minusDays) {
-        Date fecha = new Date();
+    public static Date getPrimeraHoraPrevia(Date dia, int diasPrevios) {
+        Date fecha = null;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            calendar.add(Calendar.DAY_OF_MONTH, -minusDays);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            fecha = calendar.getTime();
+            if (dia != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(dia);
+                calendar.add(Calendar.DAY_OF_MONTH, -diasPrevios);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                fecha = calendar.getTime();
+            }
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener Primera hora de {} días previos: {}", diasPrevios, e.toString());
         }
         return fecha;
     }
 
     public static Date getUltimaHora() {
-        Date fecha = new Date();
+        Date fecha = null;
         try {
+            fecha = new Date();
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(fecha);
             calendar.set(Calendar.HOUR_OF_DAY, 23);
@@ -125,116 +125,121 @@ public abstract class FechaUtils {
             calendar.set(Calendar.MILLISECOND, 999);
             fecha = calendar.getTime();
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener última hora: {}", e.toString());
         }
         return fecha;
     }
 
-    public static Date getUltimaHora(Date date) {
-        Date fecha = new Date();
+    public static Date getUltimaHora(Date dia) {
+        Date fecha = null;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            calendar.set(Calendar.MILLISECOND, 999);
-            fecha = calendar.getTime();
+            if (dia != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(dia);
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MILLISECOND, 999);
+                fecha = calendar.getTime();
+            }
         } catch (Exception e) {
-            fecha = new Date();
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            fecha = null;
+            logger.error("Error al obtener última hora: {}", e.toString());
         }
         return fecha;
     }
 
-    public static boolean isDiaEnFecha(int day, Date date) {
+    public static boolean isDiaEnFecha(int dia, Date fecha) {
         boolean result = false;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
+            if (fecha != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(fecha);
 
-            if (day == calendar.get(Calendar.DAY_OF_MONTH)) {
-                result = true;
+                if (dia == calendar.get(Calendar.DAY_OF_MONTH)) {
+                    result = true;
+                }
             }
-
         } catch (Exception e) {
             result = false;
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            logger.error("Error al validar día en fecha: {}", e.toString());
         }
         return result;
     }
 
     public static int getUltimoDiaDelMes() {
-        int day = 0;
+        int dia = 0;
         try {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(new Date());
 
-            day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            dia = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            logger.error("Error al obtener último día del mes: {}", e.toString());
         }
-        return day;
+        return dia;
     }
 
-    public static Date getUltimaSemana(Date date) {
-        Date fdow = null;
+    public static Date getUltimaSemana(Date dia) {
+        Date ultSem = null;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            calendar.add(Calendar.DAY_OF_MONTH, -7);
-            fdow = calendar.getTime();
+            if (dia != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(dia);
+                calendar.add(Calendar.DAY_OF_MONTH, -7);
+                ultSem = calendar.getTime();
+            }
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            ultSem = null;
+            logger.error("Error al obtener inicio de última semana: {}", e.toString());
         }
-        return fdow;
+        return ultSem;
     }
 
-    public static Date getDiaSiguiente(Date date, Integer next) {
-        Date fdow = null;
+    public static Date getDiaSiguiente(Date fecha, Integer diasPosteriores) {
+        Date dia = null;
         try {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            calendar.add(Calendar.DAY_OF_MONTH, next);
-            fdow = calendar.getTime();
+            if (fecha != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(fecha);
+                calendar.add(Calendar.DAY_OF_MONTH, diasPosteriores);
+                dia = calendar.getTime();
+            }
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            dia = null;
+            logger.error("Error al obtener {} días siguiente: {}", diasPosteriores, e.toString());
         }
-        return fdow;
+        return dia;
     }
 
     public static boolean isMismoDia(Date oneDay, Date otherDay) {
         return DateUtils.isSameDay(oneDay, otherDay);
     }
 
-    public static String getFechaStrCL(Date date) {
+    public static String getFechaStrCL(Date fecha) {
         String result = "";
         try {
-            Locale chileno = new Locale("es", "CL");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", chileno);
-            result = formatter.format(date);
+            if (fecha != null) {
+                Locale chileno = new Locale("es", "CL");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", chileno);
+                result = formatter.format(fecha);
+            }
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            result = "";
+            logger.error("Error al obtener fecha en formato Chileno: {}", e.toString());
         }
         return result;
     }
 
-    public static String getFechaStr(Date date, Locale locale, int formatType) {
+    public static String getFechaStr(Date fecha, Locale idioma, int formato) {
         String result = "";
         try {
             StringBuffer buffer = new StringBuffer();
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
+            calendar.setTime(fecha);
 
-            DateFormat df = DateFormat.getDateInstance(formatType, locale);
+            DateFormat df = DateFormat.getDateInstance(formato, idioma);
 
             /* Hack para tener año como YYYY y no como YY */
             FieldPosition yearPosition = new FieldPosition(DateFormat.YEAR_FIELD);
@@ -244,22 +249,37 @@ public abstract class FechaUtils {
             result = format.toString();
 
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            result = "";
+            logger.error("Error al formatear desde idioma: {}", e.toString());
         }
         return result;
     }
 
-    public static String getYear() {
-        String year = "";
+    public static Integer getYear() {
+        Integer year = null;
         try {
             Date now = new Date();
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(now);
-            year = StringUtils.trimToEmpty(calendar.get(Calendar.YEAR) + "");
+            year = calendar.get(Calendar.YEAR);
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug(e.toString());
+            year = null;
+            logger.error("Error al Obtener año: {}", e.toString());
+        }
+        return year;
+    }
+
+    public static Integer getYear(Date fecha) {
+        Integer year = null;
+        try {
+            if (fecha != null) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(fecha);
+                year = calendar.get(Calendar.YEAR);
+            }
+        } catch (Exception e) {
+            year = null;
+            logger.error("Error al Obtener año: {}", e.toString());
         }
         return year;
     }

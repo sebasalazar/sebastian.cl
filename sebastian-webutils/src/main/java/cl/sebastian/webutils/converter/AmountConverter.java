@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class AmountConverter implements Converter {
 
-    private static Logger logger = Logger.getLogger(AmountConverter.class);
+    private static final Logger logger = Logger.getLogger(AmountConverter.class);
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
@@ -33,7 +33,7 @@ public class AmountConverter implements Converter {
             monto = NumberFormat.getInstance(browserLocale).format((BigDecimal) o);
             logger.debug("Monto convertido: " + monto);
         } catch (Exception e) {
-            logger.warn("Error convirtiendo monto según LOCALE: " + e);
+            logger.error("Error convirtiendo monto según LOCALE: " + e);
         }
         return monto;
     }

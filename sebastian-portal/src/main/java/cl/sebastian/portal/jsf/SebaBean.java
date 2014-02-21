@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Qualifier("sebaBean")
 public class SebaBean implements Serializable {
 
-    private static Logger logger = LoggerFactory.getLogger(SebaBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(SebaBean.class);
 
     public String getRuta() {
         String ruta = "";
@@ -56,12 +56,12 @@ public class SebaBean implements Serializable {
     }
 
     public String getYear() {
-        String year = null;
+        String year = "";
         try {
-            year = FechaUtils.getYear();
+            year = FechaUtils.getYear().toString();
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug("Error al obtener año", e);
+            year = "";
+            logger.error("Error al obtener año: {}", e.toString());
         }
         return year;
     }

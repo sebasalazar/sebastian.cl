@@ -19,19 +19,21 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.primefaces.context.ApplicationContext;
 import org.primefaces.context.RequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.jsf.FacesContextUtils;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public abstract class FacesUtils {
 
-    private static Logger logger = Logger.getLogger(FacesUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(FacesUtils.class);
 
     private static ValueExpression getValueExpression(String el) {
         return getApplication().getExpressionFactory().createValueExpression(
@@ -73,8 +75,9 @@ public abstract class FacesUtils {
         try {
             result = getSpringContext().getBean(beanName);
         } catch (NoSuchBeanDefinitionException ex) {
-            logger.error(ex);
+            logger.error("Error al obtener Bean: {}", ex.toString());
         }
+
         if (result == null) {
             result = getJSFBean(beanName);
         }
@@ -87,7 +90,7 @@ public abstract class FacesUtils {
                 getFacesContext().getELContext());
     }
 
-    public static ApplicationContext getSpringContext() {
+    public static WebApplicationContext getSpringContext() {
         return FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance());
     }
 

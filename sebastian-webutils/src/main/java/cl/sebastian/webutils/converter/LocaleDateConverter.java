@@ -12,25 +12,23 @@ import java.util.Locale;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public class LocaleDateConverter implements Converter {
 
-    private static Logger logger = LoggerFactory.getLogger(LocaleDateConverter.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocaleDateConverter.class);
     public final static String DEFAULT_TIME_PATTERN = "HH:mm:ss";
-    
+
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        logger.debug("As object");
         Date fecha = null;
         try {
-
             /* INCOMPLETO. Completar cuando se utilice el getAsObject */
             String lang = FacesUtils.getRequest().getHeader("Accept-Language");
             Locale browserLocale = LocaleUtils.getBrowserLocale(lang);
@@ -40,8 +38,8 @@ public class LocaleDateConverter implements Converter {
             logger.debug("String:" + string);
             logger.debug("Date:" + fecha);
         } catch (Exception e) {
-            logger.error("Error al parsear string a fecha");
-            logger.error(e.getMessage());
+            fecha = null;
+            logger.error("Error al parsear string a fecha: {}", e.toString());
         }
 
         return fecha;
@@ -51,7 +49,7 @@ public class LocaleDateConverter implements Converter {
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
 
         logger.debug("As String");
-        
+
         String resultado = StringUtils.EMPTY;
         String datePart = StringUtils.EMPTY;
         String timePart = StringUtils.EMPTY;
@@ -67,18 +65,18 @@ public class LocaleDateConverter implements Converter {
             SimpleDateFormat formato = new SimpleDateFormat(DEFAULT_TIME_PATTERN);
             timePart = formato.format(o);
             datePart = FechaUtils.getFechaStr(date, browserLocale, DateFormat.SHORT);
-            
+
             /* Obtengo las horas, minutos y segundos para decidir si formateo con ellos o no */
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int minute = calendar.get(Calendar.MINUTE);
             int second = calendar.get(Calendar.SECOND);
-            
+
             logger.debug(hour + ":" + minute + ":" + second);
-            
+
             /* Decido si va con hora:minuto:segundo o no */
-            if (hour+minute+second==0) {
+            if (hour + minute + second == 0) {
                 resultado = datePart;
                 logger.debug("Fecha corta: " + resultado);
             } else {
@@ -87,8 +85,7 @@ public class LocaleDateConverter implements Converter {
             }
 
         } catch (Exception e) {
-            logger.error("Problemas para convertir fecha a string");
-            logger.error(e.getMessage());
+            logger.error("Problemas para convertir fecha a string: {}", e.toString());
         }
 
         return resultado;

@@ -3,41 +3,47 @@ package cl.sebastian.webutils.utils;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.apache.regexp.RE;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public abstract class RutUtils implements Serializable {
 
     public final static String DEFAULT_RUT_PATTERN = "##.###.###-X";
-    private static RE outRutRE = new RE("([0\\#\\.\\,]+)([^X^x^\\,^\\.^9]*)([Xx]*)");
-    private static RE inRutRE = new RE("([0-9\\.]+)\\-([a-zA-Z0-9]+)");
-    private static Logger logger = LoggerFactory.getLogger(RutUtils.class);
+    private static final Pattern outRutRE = Pattern.compile("([0\\#\\.\\,]+)([^X^x^\\,^\\.^9]*)([Xx]*)");
+    private static final Pattern inRutRE = Pattern.compile("([0-9\\.]+)\\-([a-zA-Z0-9]+)");
+    private static final Logger logger = LoggerFactory.getLogger(RutUtils.class);
 
     public static Long parseRut(String value) {
         Long result = null;
-        if (value != null) {
-            // Borramos los caracteres esperables
-            String rut = StringUtils.remove(value, ".");
-            rut = StringUtils.remove(rut, ",");
-            rut = StringUtils.remove(rut, "-");
-            // Separamos el numero y el digito verificador
-            if (!StringUtils.isEmpty(rut) && rut.length() > 1 && rut.length() < 11) {
-                String numRut = rut.substring(0, rut.length() - 1);
-                String dv = rut.substring(rut.length() - 1).toUpperCase();
-                if (NumberUtils.isDigits(numRut)) {
-                    long longRut = Long.parseLong(numRut);
-                    if (dv.charAt(0) == getDV(longRut)) {
-                        result = new Long(longRut);
+        try {
+            if (StringUtils.isNotBlank(value)) {
+                // Borramos los caracteres esperables
+                String rut = StringUtils.remove(value, ".");
+                rut = StringUtils.remove(rut, ",");
+                rut = StringUtils.remove(rut, "-");
+                // Separamos el numero y el digito verificador
+                if (StringUtils.isNotBlank(rut)) {
+                    String numRut = rut.substring(0, rut.length() - 1);
+                    String dv = rut.substring(rut.length() - 1).toUpperCase();
+                    if (NumberUtils.isDigits(numRut)) {
+                        long longRut = Long.parseLong(numRut);
+                        if (dv.charAt(0) == getDV(longRut)) {
+                            result = new Long(longRut);
+                        }
                     }
                 }
             }
+        } catch (Exception e) {
+            result = null;
+            logger.error("Error al parsear Rut: {}", e.toString());
         }
         return result;
     }
@@ -47,19 +53,22 @@ public abstract class RutUtils implements Serializable {
     }
 
     public static String formatRut(Number o, String pattern) throws Exception {
-        String formatedCheck = StringUtils.EMPTY;
+        String formatedCheck = "";
         Number rut = (Number) o;
         if (rut != null) {
             String value = rut + "-" + getDV(rut.longValue());
-            if (!(outRutRE.match(pattern))) {
+            Matcher outMatcher = outRutRE.matcher(pattern);
+            if (!(outMatcher.matches())) {
                 logger.debug("Pattern incorrecto : " + pattern);
             }
-            if (!(inRutRE.match(value))) {
+
+            Matcher inMatcher = inRutRE.matcher(value);
+            if (!(inMatcher.matches())) {
                 throw new Exception("Formato de entrada incorrecto:"
                         + rut);
             }
-            String checkFmt = outRutRE.getParen(1);
-            String valueCheck = inRutRE.getParen(1);
+            String checkFmt = outMatcher.group(1);
+            String valueCheck = inMatcher.group(1);
             DecimalFormatSymbols dfs = new DecimalFormatSymbols();
             int indexGroupChar = checkFmt.indexOf(".") >= 0 ? checkFmt.indexOf(".") : checkFmt.indexOf(",");
             if (indexGroupChar >= 0) {
@@ -74,13 +83,13 @@ public abstract class RutUtils implements Serializable {
             }
             df.setGroupingUsed(indexGroupChar >= 0);
             formatedCheck = df.format(Long.parseLong(valueCheck));
-            String separator = outRutRE.getParen(2);
+            String separator = outMatcher.group(2);
             if (!StringUtils.isEmpty(separator)) {
                 formatedCheck = formatedCheck + separator;
             }
-            String dv = outRutRE.getParen(3);
+            String dv = outMatcher.group(3);
             if (!StringUtils.isEmpty(dv)) {
-                formatedCheck = formatedCheck + inRutRE.getParen(2);
+                formatedCheck = formatedCheck + inMatcher.group(2);
             }
         }
         return formatedCheck;
@@ -96,13 +105,12 @@ public abstract class RutUtils implements Serializable {
 
     public static boolean isRut(String rut) {
         boolean resultado = false;
-        String formato = "";
-
         try {
+            String formato = "";
             formato = StringUtils.remove(rut, ".");
             formato = StringUtils.remove(formato, ",");
             formato = StringUtils.remove(formato, "-");
-            formato = formato.toUpperCase();
+            formato = StringUtils.upperCase(formato);
 
             String numeroStr = formato.substring(0, formato.length() - 1);
             Character digito = formato.charAt(formato.length() - 1);
@@ -113,61 +121,8 @@ public abstract class RutUtils implements Serializable {
             }
 
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug("Error al parsear rut", e);
-        }
-
-        return resultado;
-    }
-
-    public static String formatRutConnect(String rutStr) {
-        String resultado = null;
-
-        try {
-            String formato = "";
-            formato = StringUtils.remove(rutStr, ".");
-            formato = StringUtils.remove(formato, ",");
-            formato = StringUtils.remove(formato, "-");
-            formato = formato.toUpperCase();
-
-            String numeroStr = formato.substring(0, formato.length() - 1);
-            Character digito = formato.charAt(formato.length() - 1);
-
-            Integer numero = Integer.parseInt(numeroStr);
-            resultado = formatRut(numero);
-        } catch (Exception e) {
-            resultado = null;
-            logger.error(e.toString());
-            logger.debug("Error al formatear", e);
-        }
-
-        return resultado;
-    }
-
-    public static String formatRutConverter(String rutStr) {
-        String resultado = null;
-
-        try {
-            String formato = "";
-            formato = StringUtils.remove(rutStr, ".");
-            formato = StringUtils.remove(formato, ",");
-            formato = StringUtils.remove(formato, "-");
-            formato = formato.toUpperCase();
-
-            String numeroStr = formato.substring(0, formato.length() - 1);
-            Character digito = formato.charAt(formato.length() - 1);
-            Integer numero = Integer.parseInt(numeroStr);
-            char dV = getDV(numero);
-            if (digito.equals(dV)) {
-                resultado = formatRut(numero);
-            } else {
-                String messageError = FacesUtils.getMessage("rutInvalido");
-                throw new Exception(messageError);
-            }
-        } catch (Exception e) {
-            resultado = null;
-            logger.error(e.toString());
-            logger.debug("Error al formatear", e);
+            resultado = false;
+            logger.error("Error al parsear rut: {}", e.toString());
         }
 
         return resultado;

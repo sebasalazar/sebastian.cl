@@ -1,6 +1,6 @@
 package cl.sebastian.modelo;
 
-import org.apache.commons.lang.ObjectUtils;
+import java.util.Objects;
 
 /**
  *
@@ -38,7 +38,7 @@ public abstract class EntityBase extends BaseBean {
         boolean result = false;
         if (o != null && getClass().isAssignableFrom(o.getClass())) {
             EntityBase entity = (EntityBase) o;
-            result = ObjectUtils.equals(this.getId(), entity.getId());
+            result = Objects.equals(this.getId(), entity.getId());
         }
         return result;
     }

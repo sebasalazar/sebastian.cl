@@ -5,7 +5,7 @@ import cl.sebastian.repositorio.UsuarioRepository;
 import cl.sebastian.servicio.ServicioAutenticacion;
 import java.io.Serializable;
 import javax.annotation.Resource;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 public class ServicioAutenticacionImpl implements ServicioAutenticacion, Serializable {
 
     @Resource(name = "usuarioRepository")
-    private UsuarioRepository usuarioRepository = null;
-    private static Logger logger = LoggerFactory.getLogger(ServicioAutenticacionImpl.class);
+    private UsuarioRepository usuarioRepository;
+    private static final Logger logger = LoggerFactory.getLogger(ServicioAutenticacionImpl.class);
 
     public boolean isAutenticado(String usuario, String contrasena) {
         boolean resultado = false;
@@ -30,7 +30,7 @@ public class ServicioAutenticacionImpl implements ServicioAutenticacion, Seriali
             }
         } catch (Exception e) {
             resultado = false;
-            logger.error(e.toString());
+            logger.error("Error al obtener autenticación: {}", e.toString());
             logger.debug("Error al obtener autenticación", e);
         }
         return resultado;
@@ -45,7 +45,7 @@ public class ServicioAutenticacionImpl implements ServicioAutenticacion, Seriali
             }
         } catch (Exception e) {
             autenticado = null;
-            logger.error(e.toString());
+            logger.error("Error al autenticar: {}", e.toString());
             logger.debug("Error al autenticar", e);
         }
         return autenticado;

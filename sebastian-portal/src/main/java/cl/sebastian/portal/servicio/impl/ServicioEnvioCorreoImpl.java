@@ -21,19 +21,19 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 public class ServicioEnvioCorreoImpl implements ServicioEnvioCorreo, Serializable {
 
     @Resource(name = "correoContacto")
-    private String correoContacto = null;
+    private String correoContacto;
     @Resource(name = "mailCartero")
-    private String mailCartero = null;
+    private String mailCartero;
     @Resource(name = "velocityEngine")
-    private VelocityEngine velocityEngine = null;
+    private VelocityEngine velocityEngine;
     @Resource(name = "servicioEmail")
-    private ServicioEmail servicioEmail = null;
-    private static Logger logger = LoggerFactory.getLogger(ServicioEnvioCorreoImpl.class);
+    private ServicioEmail servicioEmail;
+    private static final Logger logger = LoggerFactory.getLogger(ServicioEnvioCorreoImpl.class);
 
     public boolean enviarCorreoContacto(String nombre, String email, String asunto, String mensaje) {
         boolean resultado = false;
         try {
-            Map<String, String> datos = new HashMap<String, String>();
+            Map<String, Object> datos = new HashMap<String, Object>();
             datos.put("titulo", "Correo de Contacto portal sebastian.cl");
             datos.put("asunto", asunto);
             datos.put("nombre", nombre);
@@ -42,12 +42,11 @@ public class ServicioEnvioCorreoImpl implements ServicioEnvioCorreo, Serializabl
             String lang = LocaleUtils.getLang();
 
             String subject = "[sebastian.cl] " + asunto;
-            String message = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, lang + "/contacto.vm", datos);
+            String message = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, lang + "/contacto.vm", "utf8", datos);
             logger.debug(message);
             resultado = servicioEmail.sendMail(correoContacto, mailCartero, subject, message);
         } catch (Exception e) {
-            logger.error(e.toString());
-            logger.debug("Error al enviar Correo de Contacto", e);
+            logger.error("Error al enviar Correo de Contacto: {}", e.toString());
         }
         return resultado;
     }

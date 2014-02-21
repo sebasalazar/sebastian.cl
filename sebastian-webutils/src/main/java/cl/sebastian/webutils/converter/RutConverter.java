@@ -1,24 +1,21 @@
 package cl.sebastian.webutils.converter;
 
-import cl.sebastian.webutils.utils.FacesUtils;
 import cl.sebastian.webutils.utils.RutUtils;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
- */
 public class RutConverter implements Converter, Serializable {
 
     public final static String DEFAULT_RUT_PATTERN = "##.###.###-X";
-    private static Logger logger = LoggerFactory.getLogger(RutConverter.class);
+    private static final String RUT_MSG_ERROR = "Ingrese un Rut válido";
+    private static final Logger logger = LoggerFactory.getLogger(RutConverter.class);
     private boolean ignorarRUTVacio = true;
 
     public RutConverter() {
@@ -28,33 +25,43 @@ public class RutConverter implements Converter, Serializable {
         this.ignorarRUTVacio = ignorar;
     }
 
+    public static FacesMessage creaMensajeRutInvalido(Object o) {
+        FacesMessage fm = new FacesMessage();
+        fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+        // fm.setSummary(RUT_MSG_ERROR + " " + o);
+        fm.setSummary(RUT_MSG_ERROR);
+        return fm;
+    }
+
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        String result = "";
+        String resultado = StringUtils.EMPTY;
+        if (o instanceof String && StringUtils.isEmpty((String) o) && ignorarRUTVacio) {
+            return resultado;
+        }
+
         try {
-            String rutStr = (String) o;
-            if (!StringUtils.isEmpty(rutStr)) {
-                result = RutUtils.formatRutConverter(rutStr);
+            Long numero = (Long) o;
+            if (!numero.equals(new Long("0"))) {
+                resultado = RutUtils.formatRut(numero);
             }
         } catch (Exception e) {
             logger.error(e.toString());
-            String messageError = FacesUtils.getMessage("rutInvalido");
-            throw new ConverterException(messageError);
+            throw new ConverterException(creaMensajeRutInvalido(o));
         }
-        return result;
+        return resultado;
     }
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        String result = "";
+
         if (StringUtils.isEmpty(value) && ignorarRUTVacio) {
-            result = "";
-        } else {
-            result = RutUtils.formatRutConverter(value);
-            if (StringUtils.isEmpty(result)) {
-                String messageError = FacesUtils.getMessage("rutInvalido");
-                throw new ConverterException(messageError);
-            }
+            return StringUtils.EMPTY;
+        }
+
+        Long result = RutUtils.parseRut(value);
+        if (result == null) {
+            throw new ConverterException(creaMensajeRutInvalido(value));
         }
         return result;
     }
