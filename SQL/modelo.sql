@@ -20,10 +20,20 @@ CREATE TABLE tips (
     PRIMARY KEY (pk)
 );
 
+DROP TABLE IF EXISTS categorias CASCADE;
+CREATE TABLE categorias (
+    pk bigserial NOT NULL,
+    nombre varchar(255) NOT NULL,
+    descripcion text,
+    UNIQUE (nombre),
+    PRIMARY KEY (pk)
+);
+
 DROP TABLE IF EXISTS posts CASCADE;
 CREATE TABLE posts (
     pk bigserial NOT NULL,
     fecha timestamp NOT NULL DEFAULT NOW(),
+    categoria_fk bigint NOT NULL REFERENCES categorias(pk) ON UPDATE CASCADE ON DELETE CASCADE,
     autor varchar(255) NOT NULL,
     titulo varchar(255) NOT NULL,
     texto text,
