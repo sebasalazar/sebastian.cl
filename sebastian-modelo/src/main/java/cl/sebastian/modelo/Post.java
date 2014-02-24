@@ -3,6 +3,8 @@ package cl.sebastian.modelo;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,18 +17,30 @@ import javax.persistence.TemporalType;
 @Table(name = "posts")
 public class Post extends PersistentEntityBase {
 
+    @JoinColumn(columnDefinition = "categoria_fk", referencedColumnName = "pk")
+    @ManyToOne
+    private Categoria categoria = null;
+
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="fecha",  nullable = false)
+    @Column(name = "fecha", nullable = false)
     private Date fecha = new Date();
-    
-    @Column(name = "autor", length = 255,  nullable = false)
+
+    @Column(name = "autor", length = 255, nullable = false)
     private String autor = null;
-    
-    @Column(name="titulo", length = 255,  nullable = false)
+
+    @Column(name = "titulo", length = 255, nullable = false)
     private String titulo = null;
-    
-    @Column(name="texto", columnDefinition = "text")
+
+    @Column(name = "texto", columnDefinition = "text")
     private String texto = null;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     public Date getFecha() {
         return fecha;
